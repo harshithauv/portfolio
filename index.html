@@ -736,6 +736,45 @@
     .about-grid{grid-template-columns:1fr;}
   }
 
+  /* ================= Email toast ================= */
+  .toast{
+    position:fixed;
+    left:50%; bottom:24px;
+    z-index:60;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    max-width:calc(100% - 32px);
+    padding:12px 12px 12px 18px;
+    background:var(--surface);
+    border:1px solid var(--border-strong);
+    border-radius:12px;
+    box-shadow:var(--shadow-lg);
+    font-size:14px;
+    color:var(--text);
+    opacity:0;
+    visibility:hidden;
+    transform:translate(-50%, 12px);
+    transition:opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+  }
+  .toast.show{opacity:1; visibility:visible; transform:translate(-50%, 0);}
+  .toast b{font-weight:600;}
+  .toast a{
+    flex-shrink:0;
+    padding:7px 12px;
+    border-radius:8px;
+    background:var(--accent);
+    color:var(--accent-contrast);
+    font-size:13px;
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .toast a:hover{background:var(--accent-strong);}
+  @media (max-width:520px){
+    .toast{flex-direction:column; align-items:stretch; text-align:center; gap:10px; padding:14px; left:16px; right:16px; max-width:none; transform:translateY(12px);}
+    .toast.show{transform:none;}
+  }
+
   /* ================= Footer ================= */
   footer{padding:32px 0 40px;}
   .foot-inner{
@@ -1213,6 +1252,11 @@
   </div>
 </section>
 
+<div class="toast" id="mailToast" role="status" aria-live="polite">
+  <span><b>Email copied:</b> harshithau.v3@gmail.com</span>
+  <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=harshithau.v3@gmail.com" target="_blank" rel="noopener">Open in Gmail</a>
+</div>
+
 <footer>
   <div class="foot-inner">
     <span class="seal"><img src="seal.png" alt="Harshitha crest" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></span>
@@ -1306,6 +1350,28 @@
       requestAnimationFrame(draw);
     }
     requestAnimationFrame(draw);
+  })();
+
+  /* ---- Email links: copy address + offer Gmail (mailto does nothing without a mail app) ---- */
+  (function(){
+    const toast = document.getElementById('mailToast');
+    let hideTimer;
+    function copy(text){
+      if(navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).catch(() => {});
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); }catch(e){}
+      ta.remove();
+    }
+    document.querySelectorAll('a[href^="mailto:"]').forEach(a => {
+      a.addEventListener('click', () => {
+        copy(a.getAttribute('href').replace('mailto:', '').split('?')[0]);
+        toast.classList.add('show');
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => toast.classList.remove('show'), 6000);
+      });
+    });
   })();
 
   /* ---- Mobile menu ---- */
