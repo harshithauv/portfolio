@@ -786,6 +786,13 @@
     color:var(--gold-bright);
     letter-spacing:0.03em;
   }
+  .project-link{
+    color:var(--gold-bright);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:border-color 0.25s ease;
+  }
+  .project-link:hover{border-bottom-color:var(--gold-bright);}
   .stat-line{
     margin-top:20px;
     padding-top:18px;
@@ -1027,11 +1034,6 @@
         <a href="#skills" data-section="skills"><span class="cash">$</span>Skills</a>
         <a href="#contact" data-section="contact"><span class="cash">$</span>Contact</a>
       </div>
-      <div class="nav-divider"></div>
-      <a class="resume-btn" id="resumeBtn" download="HarshithaResume.pdf" href="ResumeHarshitha.pdf">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-        <span>Resume</span>
-      </a>
     </div>
 
     <div class="toggle-box" id="themeToggle" role="button" aria-label="Toggle theme" tabindex="0">
@@ -1148,15 +1150,20 @@
     </div>
     <div class="project-grid">
       <div class="project-card reveal">
-        <div class="project-index">Current · Web &amp; Android</div>
-        <h3>Automotive E-Commerce Platform</h3>
-        <p>Building the web (Angular) and Android (Kotlin) experience for an automotive e-commerce platform end to end — product discovery, cart, and order workflows — kept consistent across both, backed by REST APIs for real-time data flow.</p>
+        <div class="project-index">Current · Android · Production</div>
+        <h3>Autoverse Spares</h3>
+        <p>B2B Android app that helps garages find and order the right spare parts for any vehicle and run their workshop digitally — vehicle-based part search, ML Kit scan-to-search, cart and Razorpay payments, order tracking, job cards and customer quotations. Owned end to end, from requirements to Play Store releases and production support.</p>
         <div class="tag-row">
-          <span class="tag">Angular</span>
           <span class="tag">Kotlin</span>
-          <span class="tag">REST APIs</span>
+          <span class="tag">Java</span>
+          <span class="tag">Jetpack Compose</span>
+          <span class="tag">MVVM</span>
+          <span class="tag">Dagger 2</span>
+          <span class="tag">Retrofit</span>
+          <span class="tag">Room</span>
+          <span class="tag">Firebase</span>
         </div>
-        <div class="stat-line">In progress · Autoverse Mobility</div>
+        <div class="stat-line">Live on Google Play · <a class="project-link" href="https://github.com/harshithauv/autoverse-spares-showcase" target="_blank" rel="noopener">View case study ↗</a></div>
       </div>
       <div class="project-card reveal">
         <div class="project-index">Time Series Forecasting</div>
